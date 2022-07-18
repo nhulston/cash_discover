@@ -62,8 +62,8 @@ flutter:
   fonts:
     - family: ARS
       fonts:
-        - asset: assets/fonts/ARSMaquettePro-Black.ttf
-        - asset: assets/fonts/ARSMaquettePro-BlackItalic.ttf
+        - asset: assets/fonts/ARSMaquettePro-Medium.ttf
+        - asset: assets/fonts/ARSMaquettePro-MediumItalic.ttf
           style: italic
 
 
