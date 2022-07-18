@@ -1,6 +1,5 @@
-import 'package:cash_discover/components/style.dart';
+import 'package:cash_discover/style/style.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 class NavigationIcon extends StatelessWidget {
   const NavigationIcon({Key? key, required this.icon, required this.callback}) : super(key: key);

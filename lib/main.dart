@@ -1,7 +1,8 @@
 import 'dart:ui';
 
 import 'package:cash_discover/components/navigation_icon.dart';
-import 'package:cash_discover/components/style.dart';
+import 'package:cash_discover/style/style.dart';
+import 'package:cash_discover/pages/coupons_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
@@ -16,10 +17,10 @@ class MyApp extends StatelessWidget {
     return const CupertinoApp(
       debugShowCheckedModeBanner: false,
       theme: CupertinoThemeData(
-          brightness: Brightness.dark,
-          scaffoldBackgroundColor: Style.background,
-          textTheme:
-              CupertinoTextThemeData(textStyle: TextStyle(fontFamily: 'ARS'))),
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: Style.background,
+        textTheme: CupertinoTextThemeData(textStyle: TextStyle(fontFamily: 'ARS'))
+      ),
       home: MyHomePage(),
     );
   }
@@ -57,7 +58,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         icon: CupertinoIcons
                             .money_dollar, // TODO better icon for coupon
                         callback: () {
-                          print('clicked');
+                          Navigator.of(context).push(
+                            CupertinoPageRoute(
+                              fullscreenDialog: true,
+                              builder: (context) => const CouponsPage()
+                            ),
+                          );
                         }),
                     const Spacer(),
                     const NavigationIcon(
@@ -68,11 +74,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
                 const Spacer(),
-                Image.asset('assets/amount.jpg'),
+                Image.asset('assets/images/amount.jpg'),
                 const Spacer(),
-                Image.asset('assets/pay.jpg'),
+                Image.asset('assets/images/pay.jpg'),
                 const SizedBox(height: 30),
-                Image.asset('assets/navbar.jpg')
+                Image.asset('assets/images/navbar.jpg')
               ],
             ),
           ),
