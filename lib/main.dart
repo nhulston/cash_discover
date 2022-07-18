@@ -1,5 +1,5 @@
+import 'package:cash_discover/components/style.dart';
 import 'package:cash_discover/my_page.dart';
-import 'package:cash_discover/temp.dart';
 import 'package:flutter/cupertino.dart';
 
 void main() {
@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: CupertinoThemeData(
-        primaryColor: CupertinoColors.activeBlue,
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: Style.background,
       ),
       home: MyHomePage(),
     );
@@ -39,6 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Text('test'),
               CupertinoButton(
                 child: Text('button'),
                 onPressed: () {
