@@ -57,10 +57,15 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/
+  fonts:
+    - family: ARS
+      fonts:
+        - asset: assets/fonts/ARSMaquettePro-Black.ttf
+        - asset: assets/fonts/ARSMaquettePro-BlackItalic.ttf
+          style: italic
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -87,26 +92,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-    fonts:
-      - family: ARS
-        fonts:
-          -assets: assets/fonts/ars/ARSMaquettePro-Black.ttf
-          -assets: assets/fonts/ars/ARSMaquettePro-BlackItalic.ttf
-            style: italic
-          -assets: assets/fonts/ars/ARSMaquettePro-Bold.ttf
-          -assets: assets/fonts/ars/ARSMaquettePro-BoldItalic.ttf
-            style: italic
-           weight: 700
-          -assets: assets/fonts/ars/ARSMaquettePro-Italic.ttf
-            style: italic
-          -assets: assets/fonts/ars/ARSMaquettePro-Light.ttf
-           weight: 100
-          -assets: assets/fonts/ars/ARSMaquettePro-LightItalic.ttf
-            style: italic
-           weight: 100
-          -assets: assets/fonts/ars/ARSMaquettePro-Medium.ttf
-           weight: 500
-          -assets: assets/fonts/ars/ARSMaquettePro-MediumItalic.ttf
-            style: italic
-           weight: 500
-          -assets: assets/fonts/ars/ARSMaquettePro-Regular.ttf
+

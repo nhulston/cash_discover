@@ -1,17 +1,22 @@
 import 'package:cash_discover/components/style.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class NavigationIcon extends StatelessWidget {
-  const NavigationIcon({Key? key, required this.icon, required this.isPrimary}) : super(key: key);
+  const NavigationIcon({Key? key, required this.icon, required this.callback}) : super(key: key);
   final IconData icon;
-  final bool isPrimary;
+  final VoidCallback? callback;
 
   @override
   Widget build(BuildContext context) {
-    return Icon(
-      icon,
-      color: isPrimary ? Style.primary : Style.gray,
-      size: isPrimary ? 30 : 25,
+    return CupertinoButton(
+      padding: const EdgeInsets.fromLTRB(7, 0, 7, 0),
+      onPressed: callback,
+      child: Icon(
+        icon,
+        color: Style.primary,
+        size: 35,
+      ),
     );
   }
 }
