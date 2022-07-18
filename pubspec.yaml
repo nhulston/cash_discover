@@ -62,9 +62,30 @@ flutter:
   fonts:
     - family: ARS
       fonts:
+        - asset: assets/fonts/ARSMaquettePro-Black.ttf
+          weight: 800
+        - asset: assets/fonts/ARSMaquettePro-BlackItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/ARSMaquettePro-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/ARSMaquettePro-BoldItalic.ttf
+          style: italic
+          weight: 700
+        - asset: assets/fonts/ARSMaquettePro-Italic.ttf
+          style: italic
+        - asset: assets/fonts/ARSMaquettePro-Light.ttf
+          weight: 300
+        - asset: assets/fonts/ARSMaquettePro-LightItalic.ttf
+          style: italic
+          weight: 300
         - asset: assets/fonts/ARSMaquettePro-Medium.ttf
+          weight: 500
         - asset: assets/fonts/ARSMaquettePro-MediumItalic.ttf
           style: italic
+          weight: 500
+        - asset: assets/fonts/ARSMaquettePro-Regular.ttf
+          weight: 400
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
