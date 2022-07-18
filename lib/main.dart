@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cash_discover/components/navigation_icon.dart';
 import 'package:cash_discover/components/style.dart';
 import 'package:cash_discover/my_page.dart';
@@ -14,9 +16,10 @@ class MyApp extends StatelessWidget {
     return const CupertinoApp(
       debugShowCheckedModeBanner: false,
       theme: CupertinoThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: Style.background,
-      ),
+          brightness: Brightness.dark,
+          scaffoldBackgroundColor: Style.background,
+          textTheme:
+              CupertinoTextThemeData(textStyle: TextStyle(fontFamily: 'ARS'))),
       home: MyHomePage(),
     );
   }
@@ -47,10 +50,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: const [
                   // TODO replace with official CashApp icons
                   NavigationIcon(icon: CupertinoIcons.home, isPrimary: false),
-                  NavigationIcon(icon: CupertinoIcons.creditcard, isPrimary: false),
-                  NavigationIcon(icon: CupertinoIcons.money_dollar, isPrimary: true),
-                  NavigationIcon(icon: CupertinoIcons.chart_bar, isPrimary: false),
-                  NavigationIcon(icon: CupertinoIcons.bitcoin, isPrimary: false),
+                  NavigationIcon(
+                      icon: CupertinoIcons.creditcard, isPrimary: false),
+                  NavigationIcon(
+                      icon: CupertinoIcons.money_dollar, isPrimary: true),
+                  NavigationIcon(
+                      icon: CupertinoIcons.chart_bar, isPrimary: false),
+                  NavigationIcon(
+                      icon: CupertinoIcons.bitcoin, isPrimary: false),
                 ],
               )
             ],
