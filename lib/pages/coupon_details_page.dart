@@ -47,15 +47,13 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
                 Center(
                   child: Column(children: [
                     Container(
-                        margin: const EdgeInsets.only(bottom: 10.0),
-                        child: CircleAvatar(
-                          radius: min(
-                            MediaQuery.of(context).size.height / 15,
-                            MediaQuery.of(context).size.width / 12,
-                          ),
-                          backgroundImage:
-                              const AssetImage('assets/images/pay.jpg'),
-                        )),
+                      margin: const EdgeInsets.only(bottom: 10.0),
+                      child: CircleAvatar(
+                        radius: 50,
+                        backgroundColor: widget.coupon.bgColor,
+                        child: Image.asset('assets/stores/${widget.coupon.image}', width: 65),
+                      ),
+                    ),
                   ]),
                 ),
                 Row(

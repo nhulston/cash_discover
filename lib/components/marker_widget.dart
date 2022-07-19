@@ -8,14 +8,14 @@ class MarkerWidget {
     mapMarker = await BitmapDescriptor.fromAssetImage(const ImageConfiguration(), 'assets/images/marker.png');
   }
 
-  static Marker getMarker(position, title, description, id, callback) {
+  static Marker getMarker(position, title, description, image, color, id, callback) {
     idCount++;
     return Marker(
       icon: mapMarker,
       markerId: MarkerId(idCount.toString()),
       position: position,
       onTap: () {
-        callback(title, description, id);
+        callback(title, description, image, color, id);
       },
       infoWindow: InfoWindow(
         title: title,

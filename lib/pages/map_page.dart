@@ -21,7 +21,7 @@ class _MapPageState extends State<MapPage> {
 
   late BitmapDescriptor mapMarker;
   void setCustomMarker() async {
-    mapMarker = await BitmapDescriptor.fromAssetImage(const ImageConfiguration(), 'assets/images/marker.png');
+    mapMarker = await BitmapDescriptor.fromAssetImage(const ImageConfiguration(), 'assets/stores/marker.png');
   }
 
   @override
@@ -51,6 +51,8 @@ class _MapPageState extends State<MapPage> {
   late String currentTitle;
   late String currentDesc;
   late int currentID;
+  late String currentImg;
+  late Color currentColor;
 
   static List<LatLng> locations = [
     const LatLng(37.778972, -122.430297),
@@ -72,10 +74,12 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    updatePopup(title, desc, id) {
+    updatePopup(title, desc, img, color, id) {
       setState(() {
         currentTitle = title;
         currentDesc = desc;
+        currentImg = img;
+        currentColor = color;
         currentID = id;
         popupVisible = true;
         saveVisible = true;
@@ -116,6 +120,8 @@ class _MapPageState extends State<MapPage> {
                         locations[i],
                         Coupon.coupons[i].merchantName,
                         Coupon.coupons[i].description,
+                        Coupon.coupons[i].image,
+                        Coupon.coupons[i].bgColor,
                         i,
                         updatePopup,
                       )
@@ -147,9 +153,10 @@ class _MapPageState extends State<MapPage> {
                 padding: const EdgeInsets.all(10),
                 child: Row(
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 30,
-                      backgroundImage: AssetImage('assets/images/pay.jpg'),
+                      backgroundColor: currentColor,
+                      child: Image.asset('assets/stores/$currentImg', width: 35),
                     ),
                     const SizedBox(width: 15),
                     Column(
