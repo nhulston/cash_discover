@@ -67,13 +67,24 @@ class _CouponsPageState extends State<CouponsPage> {
                     ),
                   ],
                 ),
+                CupertinoButton(
+                  child: const Icon(CupertinoIcons.map_pin_ellipse),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      CupertinoPageRoute(
+                          fullscreenDialog: true,
+                          builder: (context) => const MapPage()),
+                    );
+                  }
+                ),
                 CouponGrid(
-                    page: page,
-                    setToDiscover: () {
-                      setState(() {
-                        page = Pages.discoverCouponsPage;
-                      });
-                    }),
+                  page: page,
+                  setToDiscover: () {
+                    setState(() {
+                      page = Pages.discoverCouponsPage;
+                    });
+                  }
+                ),
               ],
             ),
           ),
