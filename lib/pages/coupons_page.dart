@@ -1,4 +1,5 @@
 import 'package:cash_discover/components/coupon_grid.dart';
+import 'package:cash_discover/pages/map_page.dart';
 import 'package:cash_discover/style/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +66,17 @@ class _CouponsPageState extends State<CouponsPage> {
                       },
                     ),
                   ],
+                ),
+                CupertinoButton(
+                  child: const Icon(CupertinoIcons.map_pin_ellipse, size: 50),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      CupertinoPageRoute(
+                          fullscreenDialog: true,
+                          builder: (context) => const MapPage()
+                      ),
+                    );
+                  }
                 ),
                 CouponGrid(page: page, setToDiscover: () {
                   setState(() {

@@ -35,7 +35,7 @@ class _CouponGridState extends State<CouponGrid> {
           const SizedBox(height: 40),
           Style.h1('No coupons yet'),
           const SizedBox(height: 10),
-          Style.p('Your coupon list is empty.\nAdd one from the discover page'),
+          Style.p('Your coupon list is empty.\nAdd some from the discover page'),
           const SizedBox(height: 90),
           CupertinoButton(
             onPressed: widget.setToDiscover,
