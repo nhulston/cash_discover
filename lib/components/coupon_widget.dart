@@ -29,7 +29,7 @@ class _CouponWidgetState extends State<CouponWidget> {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      CouponDetailsPage(title: widget.coupon.description)),
+                      CouponDetailsPage(coupon: widget.coupon)),
             );
           },
           child: Padding(

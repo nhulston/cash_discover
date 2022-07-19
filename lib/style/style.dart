@@ -53,4 +53,37 @@ class Style {
       ),
     );
   }
+
+  static Text couponCode(text) {
+    return Text(
+      text,
+      style: const TextStyle(
+        fontSize: 40,
+        fontWeight: FontWeight.w700,
+        color: primary,
+      ),
+    );
+  }
+
+  static Text couponCodeSub(text) {
+    return Text(
+      text,
+      style: const TextStyle(
+        fontSize: 15,
+        fontWeight: FontWeight.w500,
+        color: primary,
+      ),
+    );
+  }
+
+  static Text couponDetails(text) {
+    return Text(
+      text,
+      style: const TextStyle(
+        fontSize: 15,
+        fontWeight: FontWeight.w300,
+        color: lightGray,
+      ),
+    );
+  }
 }

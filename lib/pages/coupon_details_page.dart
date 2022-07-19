@@ -1,12 +1,15 @@
 import 'package:cash_discover/components/coupon_grid.dart';
 import 'package:cash_discover/style/style.dart';
+import 'package:cash_discover/models/coupon.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class CouponDetailsPage extends StatefulWidget {
-  const CouponDetailsPage({Key? key, required this.title}) : super(key: key);
+  const CouponDetailsPage({Key? key, required this.coupon}) : super(key: key);
 
-  final String title;
+  final Coupon coupon;
 
   @override
   State<CouponDetailsPage> createState() => _CouponDetailsPageState();
@@ -33,12 +36,104 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: const Icon(Icons.arrow_back
-                          //size: 30,
-                          //color: Style.primary,
-                          ),
+                      child: const Icon(
+                        Icons.arrow_back_ios_new,
+                        size: 30,
+                        color: Style.primary,
+                      ),
                     ),
-                    Style.h1(widget.title),
+                  ],
+                ),
+                Center(
+                  child: Column(children: [
+                    Container(
+                        margin: const EdgeInsets.only(bottom: 10.0),
+                        child: CircleAvatar(
+                          radius: min(
+                            MediaQuery.of(context).size.height / 15,
+                            MediaQuery.of(context).size.width / 12,
+                          ),
+                          backgroundImage:
+                              const AssetImage('assets/images/pay.jpg'),
+                        )),
+                  ]),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Style.h1(widget.coupon.merchantName),
+                  ],
+                ),
+                Center(
+                  child: Column(children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 10.0),
+                      width: 500,
+                      child: Material(
+                        color: Style.green,
+                        borderRadius: BorderRadius.circular(20),
+                        child: Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Style.couponCode(widget.coupon.couponCode),
+                                Style.couponCodeSub(''),
+                                Style.couponCodeSub('show at checkout'),
+                                Style.couponCodeSub(
+                                    'or copy and paste promo code'),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        Style.h1(''),
+                        Style.h1(widget.coupon.description),
+                        Style.h1(''),
+                      ],
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(
+                      Icons.access_time_outlined,
+                      size: 20,
+                      color: Style.lightGray,
+                    ),
+                    Style.couponDetails('Expires in 2 months'),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(
+                      Icons.money_outlined,
+                      size: 20,
+                      color: Style.lightGray,
+                    ),
+                    Style.couponDetails('Min. purchase of \$5'),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(
+                      Icons.play_arrow,
+                      size: 20,
+                      color: Style.lightGray,
+                    ),
+                    Style.couponDetails('Not stackable          '),
                   ],
                 ),
               ],
