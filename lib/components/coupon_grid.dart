@@ -11,15 +11,12 @@ class CouponGrid extends StatefulWidget {
   final VoidCallback setToDiscover;
 
   @override
-  State<CouponGrid> createState() => _CouponGridState();
+  State<CouponGrid> createState() => CouponGridState();
 }
 
-class _CouponGridState extends State<CouponGrid> {
-  List<Coupon> myCoupons = [];
-  List<Coupon> discoverCoupons = [
-    Coupon('Brick Pizza', '', 'PIZZA', CouponTypes.percentage, 10, '10% Off All Pizzas', DateTime(2022, 8, 15)),
-    Coupon('Sunny Skate Shop', '', 'SUNNY', CouponTypes.fixed, 15, '\$15 Off Any Skateboard', DateTime(2022, 7, 30)),
-  ];
+class CouponGridState extends State<CouponGrid> {
+  static List<Coupon> myCoupons = [];
+  static List<Coupon> discoverCoupons = Coupon.coupons;
 
   @override
   Widget build(BuildContext context) {

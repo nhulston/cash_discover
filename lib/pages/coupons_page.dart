@@ -72,8 +72,11 @@ class _CouponsPageState extends State<CouponsPage> {
                   onPressed: () {
                     Navigator.of(context).push(
                       CupertinoPageRoute(
-                          fullscreenDialog: true,
-                          builder: (context) => const MapPage()),
+                        fullscreenDialog: true,
+                        builder: (context) => MapPage(updateParentState: () {
+                          setState(() {});
+                        })
+                      ),
                     );
                   }
                 ),

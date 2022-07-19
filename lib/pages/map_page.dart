@@ -1,12 +1,16 @@
+import 'package:cash_discover/components/coupon_grid.dart';
 import 'package:cash_discover/components/marker_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../models/coupon.dart';
 import '../style/style.dart';
 
 class MapPage extends StatefulWidget {
-  const MapPage({Key? key}) : super(key: key);
+  const MapPage({Key? key, required this.updateParentState}) : super(key: key);
+
+  final VoidCallback updateParentState;
 
   @override
   State<MapPage> createState() => _MapPageState();
@@ -29,6 +33,8 @@ class _MapPageState extends State<MapPage> {
 
   @override
   void dispose() {
+    MarkerWidget.idCount = 0;
+    popupVisible = false;
     _googleMapController.dispose();
     super.dispose();
   }
@@ -38,9 +44,44 @@ class _MapPageState extends State<MapPage> {
     zoom: 15,
   );
 
-  static Set<Marker> markers = {};
+  Set<Marker> markers = {};
+  static bool saveVisible = true;
+  static bool popupVisible = false;
+
+  late String currentTitle;
+  late String currentDesc;
+  late int currentID;
+
+  static List<LatLng> locations = [
+    const LatLng(37.778972, -122.430297),
+    const LatLng(37.780572, -122.428297),
+    const LatLng(37.782572, -122.430347),
+    const LatLng(37.782572, -122.430347),
+    const LatLng(37.781572, -122.433147),
+    const LatLng(37.772972, -122.432197),
+    const LatLng(37.776192, -122.433397),
+    const LatLng(37.774232, -122.434997),
+    const LatLng(37.772752, -122.428597),
+    const LatLng(37.776152, -122.426397),
+    const LatLng(37.770562, -122.429797),
+    const LatLng(37.765562, -122.430797),
+    const LatLng(37.763562, -122.433797),
+    const LatLng(37.761562, -122.427797),
+    const LatLng(37.759562, -122.423797),
+  ];
+
   @override
   Widget build(BuildContext context) {
+    updatePopup(title, desc, id) {
+      setState(() {
+        currentTitle = title;
+        currentDesc = desc;
+        currentID = id;
+        popupVisible = true;
+        saveVisible = true;
+      });
+    }
+
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         leading: Style.h1('Explore'),
@@ -48,6 +89,7 @@ class _MapPageState extends State<MapPage> {
           padding: EdgeInsets.zero,
           onPressed: () {
             Navigator.of(context).pop();
+            widget.updateParentState();
           },
           child: const Icon(
             Icons.close_rounded,
@@ -68,33 +110,82 @@ class _MapPageState extends State<MapPage> {
 
               if (markers.isEmpty) {
                 setState(() {
-                  markers = {
-                    MarkerWidget.getMarker(const LatLng(37.778972, -122.430297), 'title', 'desc'),
-                    MarkerWidget.getMarker(const LatLng(37.780572, -122.428297), 'title', 'desc'),
-                    MarkerWidget.getMarker(const LatLng(37.782572, -122.430347), 'title', 'desc'),
-                    MarkerWidget.getMarker(const LatLng(37.781572, -122.433147), 'title', 'desc'),
-                    MarkerWidget.getMarker(const LatLng(37.772972, -122.432197), 'title', 'desc'),
-                    MarkerWidget.getMarker(const LatLng(37.776192, -122.433397), 'title', 'desc'),
-                    MarkerWidget.getMarker(const LatLng(37.774232, -122.434997), 'title', 'desc'),
-                    MarkerWidget.getMarker(const LatLng(37.772752, -122.428597), 'title', 'desc'),
-                    MarkerWidget.getMarker(const LatLng(37.776152, -122.426397), 'title', 'desc'),
-                    MarkerWidget.getMarker(const LatLng(37.770562, -122.429797), 'title', 'desc'),
-                    MarkerWidget.getMarker(const LatLng(37.765562, -122.430797), 'title', 'desc'),
-                    MarkerWidget.getMarker(const LatLng(37.763562, -122.433797), 'title', 'desc'),
-                    MarkerWidget.getMarker(const LatLng(37.761562, -122.427797), 'title', 'desc'),
-                    MarkerWidget.getMarker(const LatLng(37.759562, -122.423797), 'title', 'desc'),
-                  };
+                  for (int i = 0; i < locations.length; i++) {
+                    markers.add(
+                      MarkerWidget.getMarker(
+                        locations[i],
+                        Coupon.coupons[i].merchantName,
+                        Coupon.coupons[i].description,
+                        i,
+                        updatePopup,
+                      )
+                    );
+                  }
                 });
               }
             },
             markers: markers,
           ),
           Positioned(
-            right: 30,
-            bottom: 30,
+            left: 20,
+            top: 110,
             child: FloatingActionButton(
               onPressed: () => _googleMapController.animateCamera(CameraUpdate.newCameraPosition(_initialCameraPos)),
               child: const Icon(Icons.center_focus_strong),
+            ),
+          ),
+          if (popupVisible) Positioned(
+            left: 30,
+            right: 30,
+            bottom: 30,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Style.primary,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  children: [
+                    const CircleAvatar(
+                      radius: 30,
+                      backgroundImage: AssetImage('assets/images/pay.jpg'),
+                    ),
+                    const SizedBox(width: 15),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Style.mapTitle(currentTitle),
+                        Style.mapDescription(currentDesc),
+                      ],
+                    ),
+                    const Spacer(),
+                    saveVisible ? CupertinoButton(
+                        child: const Text(
+                          'SAVE',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Style.blue,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            saveVisible = false;
+                            CouponGridState.myCoupons.add(Coupon.coupons[currentID]);
+                          });
+                        }
+                    ) : const Padding(
+                      padding: EdgeInsets.only(right: 13),
+                      child: Icon(
+                        CupertinoIcons.checkmark_alt_circle_fill,
+                        color: Style.green,
+                        size: 40,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         ],

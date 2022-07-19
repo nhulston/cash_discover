@@ -8,16 +8,18 @@ class MarkerWidget {
     mapMarker = await BitmapDescriptor.fromAssetImage(const ImageConfiguration(), 'assets/images/marker.png');
   }
 
-  static Marker getMarker(position, title, description) {
+  static Marker getMarker(position, title, description, id, callback) {
     idCount++;
     return Marker(
       icon: mapMarker,
       markerId: MarkerId(idCount.toString()),
       position: position,
+      onTap: () {
+        callback(title, description, id);
+      },
       infoWindow: InfoWindow(
-        title: idCount.toString(),
-        snippet: description,
-      )
+        title: title,
+      ),
     );
   }
 }

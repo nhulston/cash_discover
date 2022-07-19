@@ -42,7 +42,7 @@ class _CouponWidgetState extends State<CouponWidget> {
                     MediaQuery.of(context).size.height / 25,
                     MediaQuery.of(context).size.width / 12,
                   ),
-                  backgroundImage: const AssetImage('assets/images/pay.jpg'),
+                  backgroundImage: AssetImage('assets/images/${widget.coupon.image}'),
                 ),
                 const Spacer(),
                 Style.couponHeader(widget.coupon.description),
