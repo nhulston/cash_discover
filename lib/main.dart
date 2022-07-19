@@ -17,10 +17,10 @@ class MyApp extends StatelessWidget {
     return const CupertinoApp(
       debugShowCheckedModeBanner: false,
       theme: CupertinoThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: Style.background,
-        textTheme: CupertinoTextThemeData(textStyle: TextStyle(fontFamily: 'ARS'))
-      ),
+          brightness: Brightness.dark,
+          scaffoldBackgroundColor: Style.background,
+          textTheme:
+              CupertinoTextThemeData(textStyle: TextStyle(fontFamily: 'ARS'))),
       home: MyHomePage(),
     );
   }
@@ -56,13 +56,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         icon: CupertinoIcons.search, callback: null),
                     NavigationIcon(
                         icon: CupertinoIcons
-                            .money_dollar, // TODO better icon for coupon
+                            .tickets, // TODO better icon for coupon
                         callback: () {
                           Navigator.of(context).push(
                             CupertinoPageRoute(
-                              fullscreenDialog: true,
-                              builder: (context) => const CouponsPage()
-                            ),
+                                fullscreenDialog: true,
+                                builder: (context) => const CouponsPage()),
                           );
                         }),
                     const Spacer(),

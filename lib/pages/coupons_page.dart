@@ -66,11 +66,13 @@ class _CouponsPageState extends State<CouponsPage> {
                     ),
                   ],
                 ),
-                CouponGrid(page: page, setToDiscover: () {
-                  setState(() {
-                    page = Pages.discoverCouponsPage;
-                  });
-                }),
+                CouponGrid(
+                    page: page,
+                    setToDiscover: () {
+                      setState(() {
+                        page = Pages.discoverCouponsPage;
+                      });
+                    }),
               ],
             ),
           ),
