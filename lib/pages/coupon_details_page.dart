@@ -33,7 +33,7 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: const Icon(CupertinoIcons.arrow_back
+                      child: const Icon(Icons.arrow_back
                           //size: 30,
                           //color: Style.primary,
                           ),

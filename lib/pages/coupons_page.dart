@@ -1,4 +1,5 @@
 import 'package:cash_discover/components/coupon_grid.dart';
+import 'package:cash_discover/pages/map_page.dart';
 import 'package:cash_discover/style/style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
