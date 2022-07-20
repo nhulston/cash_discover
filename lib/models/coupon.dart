@@ -25,7 +25,7 @@ class Coupon {
     Coupon('Fresh Cuts', 'STAYFRESH', '\$5 Off Any Cut', DateTime(2022, 10, 8), 'barber.png', Colors.purpleAccent),
     Coupon('Urban Exchange', 'XCHANGE', '\$5 Off Any T-Shirt', DateTime(2022, 10, 8), 'exchange.png', Colors.blueAccent),
     Coupon('Salad Palace', 'FRESH', '\$5 Off Any Salad', DateTime(2022, 10, 8), 'salad.png', Colors.redAccent),
-    Coupon('Rick''s Climbing', 'CLIMB', 'Kids Climb Free', DateTime(2022, 10, 8), 'climb.png', Colors.green),
+    Coupon('Rick\'s Climbing', 'CLIMB', 'Kids Climb Free', DateTime(2022, 10, 8), 'climb.png', Colors.green),
     Coupon('Coffee Spot', 'TEA', '\$3 Off Any Iced Tea', DateTime(2022, 10, 8), 'coffee.png', Colors.redAccent),
     Coupon('Bagels n\' Brunch', 'BRUNCH', 'Free Fruit', DateTime(2022, 10, 8), 'bagel.png', Colors.deepPurpleAccent),
     Coupon('Burger Stop', 'FRIES', '20% Off Any Order', DateTime(2022, 10, 8), 'burger.png', Colors.blueAccent),
