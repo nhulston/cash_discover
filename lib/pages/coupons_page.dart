@@ -20,6 +20,8 @@ enum Pages {
 
 class _CouponsPageState extends State<CouponsPage> {
   Pages page = Pages.myCouponsPage;
+  int? currentPage = 0;
+  CustomSegmentedController<int> controller = CustomSegmentedController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +54,7 @@ class _CouponsPageState extends State<CouponsPage> {
                 Material(
                   color: Colors.transparent,
                   child: CustomSlidingSegmentedControl<int>(
+                    controller: controller,
                     decoration: BoxDecoration(
                       color: Style.darkGray,
                       borderRadius: BorderRadius.circular(100),
@@ -89,6 +92,7 @@ class _CouponsPageState extends State<CouponsPage> {
                   setToDiscover: () {
                     setState(() {
                       page = Pages.discoverCouponsPage;
+                      controller.value = 1;
                     });
                   }
                 ),
