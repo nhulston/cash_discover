@@ -123,6 +123,7 @@ class _MapPageState extends State<MapPage> {
                         Coupon.coupons[i].bgColor,
                         i,
                         updatePopup,
+                        Coupon.coupons[i].marker,
                       )
                     );
                   }

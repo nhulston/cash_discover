@@ -30,6 +30,7 @@ flutter:
   assets:
     - assets/images/
     - assets/stores/
+    - assets/markers/
   fonts:
     - family: ARS
       fonts:
