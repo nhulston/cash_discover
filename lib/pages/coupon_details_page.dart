@@ -64,12 +64,7 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
                 ),
                 Center(
                   child: Column(children: [
-                    GestureDetector(
-                      onTap: () {
-                        CouponGridState.myCoupons.add(widget.coupon);
-                        setState(() {
-                        });},
-                    child: Container(
+                    Container(
                       margin: const EdgeInsets.symmetric(vertical: 10.0),
                       width: 500,
                       child: Material(
@@ -81,17 +76,21 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Style.couponCode(widget.coupon.couponCode),
-                                Style.couponCodeSub(''),
-                                Style.couponCodeSub('Click to Save In'),
-                                Style.couponCodeSub(
-                                    'My Coupons'),
+                                CupertinoButton(
+                                  padding: EdgeInsets.zero,
+                                  onPressed: () {
+                                    CouponGridState.myCoupons.add(widget.coupon);
+                                    setState(() {
+                                    });
+                                  },
+                                  child: const Text("Save to My Coupons", style: TextStyle(color: Colors.white))
+                                ),
                               ],
                             ),
                           ),
                         ),
                       ),
-                    ),),
+                    ),
                   ]),
                 ),
                 Row(
