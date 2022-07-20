@@ -1,4 +1,3 @@
-import 'package:cash_discover/components/coupon_grid.dart';
 import 'package:cash_discover/components/marker_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -179,7 +178,7 @@ class _MapPageState extends State<MapPage> {
                         onPressed: () {
                           setState(() {
                             saveVisible = false;
-                            CouponGridState.myCoupons.add(Coupon.coupons[currentID]);
+                            Coupon.myCoupons.add(Coupon.coupons[currentID]);
                           });
                         }
                     ) : const Padding(

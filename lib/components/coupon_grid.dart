@@ -16,12 +16,9 @@ class CouponGrid extends StatefulWidget {
 }
 
 class CouponGridState extends State<CouponGrid> {
-  static Set<Coupon> myCoupons = {};
-  static Set<Coupon> discoverCoupons = Coupon.coupons.toSet();
-
   @override
   Widget build(BuildContext context) {
-    if (widget.page == Pages.myCouponsPage && myCoupons.isEmpty) {
+    if (widget.page == Pages.myCouponsPage && Coupon.myCoupons.isEmpty) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -43,10 +40,32 @@ class CouponGridState extends State<CouponGrid> {
       );
     }
 
-    List<Coupon> currentCoupons =
-      widget.page == Pages.myCouponsPage
-      ? myCoupons.toList()
-      : discoverCoupons.toList();
+    List<CouponWidget> visibleCoupons;
+    if (widget.page == Pages.myCouponsPage) {
+      List<Coupon> myCoupons = Coupon.myCoupons.toList();
+      visibleCoupons = List.generate(myCoupons.length, (index) {
+        return CouponWidget(
+            coupon: myCoupons[index],
+            updateParentCallback: () {
+              setState(() {});
+            }
+        );
+      });
+    } else {
+      visibleCoupons = [];
+      for (Coupon c in Coupon.coupons) {
+        if (!c.isOwned()) {
+          visibleCoupons.add(
+            CouponWidget(
+              coupon: c,
+              updateParentCallback: () {
+                setState(() {});
+              }
+            )
+          );
+        }
+      }
+    }
     return GridView.count(
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
@@ -54,9 +73,7 @@ class CouponGridState extends State<CouponGrid> {
       childAspectRatio: 0.85,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      children: List.generate(currentCoupons.length, (index) {
-        return CouponWidget(coupon: currentCoupons[index]);
-      }),
+      children: visibleCoupons,
     );
   }
 }

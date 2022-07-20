@@ -17,6 +17,14 @@ class Coupon {
     this.bgColor,
   );
 
+  bool isOwned() {
+    return myCoupons.contains(this);
+  }
+
+  removeFromOwned() {
+    myCoupons.remove(this);
+  }
+
   static List<Coupon> coupons = [
     Coupon('Brick Pizza', 'PIZZA', '10% Off All Pizzas', DateTime(2022, 8, 15), 'pizza.png', Colors.blueAccent),
     Coupon('Sunny Skates', 'SUNNY', '\$15 Off Any Board', DateTime(2022, 7, 30), 'skateboard.png', Colors.purpleAccent),
@@ -34,4 +42,6 @@ class Coupon {
     Coupon('Frozen Custard', 'FROZEN', '1 Scoop Free', DateTime(2022, 10, 8), 'ice-cream.png', Colors.purpleAccent),
     Coupon('Super Spa', 'SUPER', '\$10 Off Any Massage', DateTime(2022, 10, 8), 'spa.png', Colors.blueAccent),
   ];
+
+  static Set<Coupon> myCoupons = {};
 }

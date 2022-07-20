@@ -1,4 +1,3 @@
-import 'package:cash_discover/components/coupon_grid.dart';
 import 'package:cash_discover/style/style.dart';
 import 'package:cash_discover/models/coupon.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -6,9 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CouponDetailsPage extends StatefulWidget {
-  const CouponDetailsPage({Key? key, required this.coupon}) : super(key: key);
+  const CouponDetailsPage({Key? key, required this.coupon, required this.setParentState}) : super(key: key);
 
   final Coupon coupon;
+  final VoidCallback setParentState;
 
   @override
   State<CouponDetailsPage> createState() => _CouponDetailsPageState();
@@ -73,8 +73,9 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
                     borderRadius: BorderRadius.circular(10),
                     child: InkWell(
                       onTap: () {
-                        CouponGridState.myCoupons.add(widget.coupon);
+                        Coupon.myCoupons.add(widget.coupon);
                         setState(() {});
+                        widget.setParentState();
                       },
                       child: Container(
                         margin: const EdgeInsets.symmetric(vertical: 10.0),
