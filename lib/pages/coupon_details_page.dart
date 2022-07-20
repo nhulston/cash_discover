@@ -64,7 +64,12 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
                 ),
                 Center(
                   child: Column(children: [
-                    Container(
+                    GestureDetector(
+                      onTap: () {
+                        CouponGridState.myCoupons.add(widget.coupon);
+                        setState(() {
+                        });},
+                    child: Container(
                       margin: const EdgeInsets.symmetric(vertical: 10.0),
                       width: 500,
                       child: Material(
@@ -78,15 +83,15 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
                               children: [
                                 Style.couponCode(widget.coupon.couponCode),
                                 Style.couponCodeSub(''),
-                                Style.couponCodeSub('show at checkout'),
+                                Style.couponCodeSub('Click to Save In'),
                                 Style.couponCodeSub(
-                                    'or copy and paste promo code'),
+                                    'My Coupons'),
                               ],
                             ),
                           ),
                         ),
                       ),
-                    ),
+                    ),),
                   ]),
                 ),
                 Row(
