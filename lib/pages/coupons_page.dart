@@ -1,6 +1,8 @@
 import 'package:cash_discover/components/coupon_grid.dart';
+import 'package:cash_discover/components/sliding_segment_text.dart';
 import 'package:cash_discover/pages/map_page.dart';
 import 'package:cash_discover/style/style.dart';
+import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -46,26 +48,28 @@ class _CouponsPageState extends State<CouponsPage> {
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CupertinoButton(
-                      child: const Text('My Coupons'),
-                      onPressed: () {
-                        setState(() {
-                          page = Pages.myCouponsPage;
-                        });
-                      },
+                const SizedBox(height: 20),
+                Material(
+                  color: Colors.transparent,
+                  child: CustomSlidingSegmentedControl<int>(
+                    decoration: BoxDecoration(
+                      color: Style.darkGray,
+                      borderRadius: BorderRadius.circular(100),
                     ),
-                    CupertinoButton(
-                      child: const Text('Discover Coupons'),
-                      onPressed: () {
-                        setState(() {
-                          page = Pages.discoverCouponsPage;
-                        });
-                      },
+                    thumbDecoration: BoxDecoration(
+                      color: Style.gray,
+                      borderRadius: BorderRadius.circular(100),
                     ),
-                  ],
+                    children: const {
+                      0: SlidingSegmentText(text: 'My Coupons'),
+                      1: SlidingSegmentText(text: 'Discover'),
+                    },
+                    onValueChanged: (newValue) {
+                      setState(() {
+                        page = newValue == 0 ? Pages.myCouponsPage : Pages.discoverCouponsPage;
+                      });
+                    },
+                  ),
                 ),
                 CupertinoButton(
                   child: const Icon(CupertinoIcons.map_pin_ellipse),
