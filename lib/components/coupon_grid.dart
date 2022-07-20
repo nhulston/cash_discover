@@ -15,8 +15,8 @@ class CouponGrid extends StatefulWidget {
 }
 
 class CouponGridState extends State<CouponGrid> {
-  static List<Coupon> myCoupons = [];
-  static List<Coupon> discoverCoupons = Coupon.coupons;
+  static Set<Coupon> myCoupons = {};
+  static Set<Coupon> discoverCoupons = Coupon.coupons.toSet();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class CouponGridState extends State<CouponGrid> {
           const SizedBox(height: 40),
           Style.h1('No coupons yet'),
           const SizedBox(height: 10),
-          Style.p('Your coupon list is empty.\nAdd some from the discover page'),
+          Style.p('Your coupon list is empty.\nAdd some from the discover page!'),
           const SizedBox(height: 90),
           CupertinoButton(
             onPressed: widget.setToDiscover,
@@ -44,8 +44,8 @@ class CouponGridState extends State<CouponGrid> {
 
     List<Coupon> currentCoupons =
       widget.page == Pages.myCouponsPage
-      ? myCoupons
-      : discoverCoupons;
+      ? myCoupons.toList()
+      : discoverCoupons.toList();
     return GridView.count(
       mainAxisSpacing: 9,
       crossAxisSpacing: 9,
