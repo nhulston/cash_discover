@@ -48,8 +48,8 @@ class CouponGridState extends State<CouponGrid> {
       ? myCoupons.toList()
       : discoverCoupons.toList();
     return GridView.count(
-      mainAxisSpacing: 9,
-      crossAxisSpacing: 9,
+      mainAxisSpacing: 10,
+      crossAxisSpacing: 10,
       crossAxisCount: 2,
       childAspectRatio: 0.85,
       shrinkWrap: true,

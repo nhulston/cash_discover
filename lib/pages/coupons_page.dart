@@ -1,4 +1,5 @@
 import 'package:cash_discover/components/coupon_grid.dart';
+import 'package:cash_discover/components/filter_box.dart';
 import 'package:cash_discover/components/sliding_segment_text.dart';
 import 'package:cash_discover/pages/map_page.dart';
 import 'package:cash_discover/style/style.dart';
@@ -22,20 +23,22 @@ class _CouponsPageState extends State<CouponsPage> {
   Pages page = Pages.myCouponsPage;
   CustomSegmentedController<int> controller = CustomSegmentedController();
 
+  static const padding = 20.0;
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       child: SafeArea(
         bottom: false,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          padding: const EdgeInsets.only(left: 20, right: 20),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Style.h1('Coupons'),
+                    const Spacer(),
                     CupertinoButton(
                       padding: EdgeInsets.zero,
                       onPressed: () {
@@ -75,26 +78,53 @@ class _CouponsPageState extends State<CouponsPage> {
                     },
                   ),
                 ),
-                if (page == Pages.discoverCouponsPage) CupertinoButton(
-                    child: const Icon(CupertinoIcons.map_pin_ellipse),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        CupertinoPageRoute(
-                            fullscreenDialog: true,
-                            builder: (context) =>
-                                MapPage(updateParentState: () {
-                                  setState(() {});
-                                })),
-                      );
-                    }),
+                if (page == Pages.discoverCouponsPage)const SizedBox(height: 30),
+                if (page == Pages.discoverCouponsPage) SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: const [
+                      FilterBox(text: 'Food & Drink', icon: Icons.fastfood),
+                      SizedBox(width: padding / 2),
+                      FilterBox(text: 'Things to Do', icon: CupertinoIcons.tickets_fill),
+                      SizedBox(width: padding / 2),
+                      FilterBox(text: 'Coffee', icon: Icons.coffee_rounded),
+                      SizedBox(width: padding / 2),
+                      FilterBox(text: 'Beauty', icon: Icons.spa_rounded),
+                    ],
+                  ),
+                ),
+                if (page == Pages.discoverCouponsPage) const SizedBox(height: 30),
+                if (page == Pages.discoverCouponsPage) GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Style.h2('Near You'),
+                      const Icon(Icons.arrow_forward_ios, color: Style.lightGray, size: 18),
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      CupertinoPageRoute(
+                          fullscreenDialog: true,
+                          builder: (context) => MapPage(updateParentState: () {
+                            setState(() {});
+                          }
+                          )
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(height: page == Pages.discoverCouponsPage ? 15 : 30),
                 CouponGrid(
-                    page: page,
-                    setToDiscover: () {
-                      setState(() {
-                        page = Pages.discoverCouponsPage;
-                        controller.value = 1;
-                      });
-                    }),
+                  page: page,
+                  setToDiscover: () {
+                    setState(() {
+                      page = Pages.discoverCouponsPage;
+                      controller.value = 1;
+                    });
+                  }
+                ),
               ],
             ),
           ),

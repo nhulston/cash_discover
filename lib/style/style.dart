@@ -23,6 +23,17 @@ class Style {
     );
   }
 
+  static Text h2(text) {
+    return Text(
+      text,
+      style: const TextStyle(
+        fontWeight: FontWeight.normal,
+        fontSize: 24,
+        color: primary,
+      ),
+    );
+  }
+
   static Text p(text) {
     return Text(
       text,
