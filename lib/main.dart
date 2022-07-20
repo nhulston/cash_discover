@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:cash_discover/components/navigation_icon.dart';
 import 'package:cash_discover/style/style.dart';
 import 'package:cash_discover/pages/coupons_page.dart';
@@ -15,6 +15,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CupertinoApp(
+      localizationsDelegates: [
+        DefaultMaterialLocalizations.delegate,
+        DefaultCupertinoLocalizations.delegate,
+        DefaultWidgetsLocalizations.delegate,
+      ],
       debugShowCheckedModeBanner: false,
       theme: CupertinoThemeData(
           brightness: Brightness.dark,

@@ -60,7 +60,7 @@ class Style {
     return Text(
       text,
       style: const TextStyle(
-        fontSize: 40,
+        fontSize: 42,
         fontWeight: FontWeight.w700,
         color: primary,
       ),
@@ -71,8 +71,8 @@ class Style {
     return Text(
       text,
       style: const TextStyle(
-        fontSize: 15,
-        fontWeight: FontWeight.w500,
+        fontSize: 14,
+        fontWeight: FontWeight.w300,
         color: primary,
       ),
     );
@@ -82,7 +82,7 @@ class Style {
     return Text(
       text,
       style: const TextStyle(
-        fontSize: 15,
+        fontSize: 16,
         fontWeight: FontWeight.w300,
         color: lightGray,
       ),
