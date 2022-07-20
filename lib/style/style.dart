@@ -83,7 +83,6 @@ class Style {
       text,
       style: const TextStyle(
         fontSize: 14,
-        fontWeight: FontWeight.w300,
         color: primary,
       ),
     );

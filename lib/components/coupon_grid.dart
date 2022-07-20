@@ -48,7 +48,8 @@ class CouponGridState extends State<CouponGrid> {
             coupon: myCoupons[index],
             updateParentCallback: () {
               setState(() {});
-            }
+            },
+            page: widget.page,
         );
       });
     } else {
@@ -60,7 +61,8 @@ class CouponGridState extends State<CouponGrid> {
               coupon: c,
               updateParentCallback: () {
                 setState(() {});
-              }
+              },
+              page: widget.page,
             )
           );
         }

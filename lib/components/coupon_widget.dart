@@ -5,10 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cash_discover/pages/coupon_details_page.dart';
 
+import '../pages/coupons_page.dart';
+
 class CouponWidget extends StatefulWidget {
-  const CouponWidget({Key? key, required this.coupon, required this.updateParentCallback}) : super(key: key);
+  const CouponWidget({Key? key, required this.coupon, required this.updateParentCallback, required this.page}) : super(key: key);
   final Coupon coupon;
   final VoidCallback updateParentCallback;
+  final Pages page;
 
   @override
   State<CouponWidget> createState() => _CouponWidgetState();
@@ -26,6 +29,7 @@ class _CouponWidgetState extends State<CouponWidget> {
         color: Style.darkGray,
         borderRadius: BorderRadius.circular(10),
         child: InkWell(
+          borderRadius: BorderRadius.circular(10),
           onTap: () {
             Navigator.push(
               context,
@@ -34,7 +38,8 @@ class _CouponWidgetState extends State<CouponWidget> {
                       CouponDetailsPage(
                         coupon: widget.coupon,
                         setParentState: widget.updateParentCallback,
-                      )
+                        page: widget.page,
+                      ),
               ),
             );
           },

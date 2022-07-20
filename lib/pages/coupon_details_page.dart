@@ -1,3 +1,5 @@
+import 'package:cash_discover/components/coupon_info_field.dart';
+import 'package:cash_discover/pages/coupons_page.dart';
 import 'package:cash_discover/style/style.dart';
 import 'package:cash_discover/models/coupon.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -5,17 +7,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CouponDetailsPage extends StatefulWidget {
-  const CouponDetailsPage({Key? key, required this.coupon, required this.setParentState}) : super(key: key);
+  const CouponDetailsPage({Key? key, required this.coupon, required this.setParentState, required this.page}) : super(key: key);
 
   final Coupon coupon;
   final VoidCallback setParentState;
+  final Pages page;
 
   @override
   State<CouponDetailsPage> createState() => _CouponDetailsPageState();
 }
 
-class _CouponDetailsPageState extends State<CouponDetailsPage> {
-  //Pages page = Pages.myCouponDetailsPage;
+class _CouponDetailsPageState extends State<CouponDetailsPage> with SingleTickerProviderStateMixin {
+  Color _color = Style.blue;
 
   @override
   Widget build(BuildContext context) {
@@ -27,151 +30,73 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CupertinoButton(
-                      padding: EdgeInsets.zero,
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Icon(
-                        Icons.arrow_back_ios_new,
-                        size: 30,
-                        color: Style.primary,
-                      ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: CupertinoButton(
+                    padding: EdgeInsets.zero,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Icon(
+                      Icons.arrow_back_ios_new,
+                      size: 30,
+                      color: Style.primary,
                     ),
-                  ],
+                  ),
                 ),
-                Center(
-                  child: Column(children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10.0),
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundColor: widget.coupon.bgColor,
-                        child: Image.asset(
-                            'assets/stores/${widget.coupon.image}',
-                            width: 65),
-                      ),
-                    ),
-                  ]),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10.0),
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundColor: widget.coupon.bgColor,
+                    child: Image.asset(
+                        'assets/stores/${widget.coupon.image}',
+                        width: 65),
+                  ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Style.h1(widget.coupon.merchantName),
-                  ],
-                ),
+                Style.h1(widget.coupon.merchantName),
+                const SizedBox(height: 30),
                 AnimatedContainer(
-                  //height: sideLength,
-                  //width: sideLength,
-                  duration: const Duration(seconds: 2),
-                  curve: Curves.easeIn,
-                  child: Material(
-                    color: Style.background,
-                    borderRadius: BorderRadius.circular(10),
-                    child: InkWell(
-                      onTap: () {
-                        Coupon.myCoupons.add(widget.coupon);
-                        setState(() {});
-                        widget.setParentState();
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10.0),
-                        width: 500,
-                        child: Material(
-                          color: Style.green,
-                          borderRadius: BorderRadius.circular(20),
-                          child: Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: Center(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Style.couponCode(widget.coupon.couponCode),
-                                  const SizedBox(height: 16),
-                                  Style.couponCodeSub(
-                                      'Click to Save in My Coupons'),
-                                  //Style.couponCodeSub('My Coupons'),
-                                ],
-                              ),
-                            ),
-                          ),
+                  width: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: _color,
+                  ),
+                  duration: const Duration(milliseconds: 400),
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: () {
+                      Coupon.myCoupons.add(widget.coupon);
+                      setState(() {
+                        _color = CupertinoColors.systemGreen;
+                      });
+                      widget.setParentState();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Style.couponCode(widget.coupon.couponCode),
+                            if (widget.page == Pages.discoverCouponsPage) const SizedBox(height: 16),
+                            if (widget.page == Pages.discoverCouponsPage) Style.couponCodeSub(
+                                widget.coupon.isOwned() ? 'Coupon successfully saved!' : 'Click to save coupon.'),
+                            //Style.couponCodeSub('My Coupons'),
+                          ],
                         ),
                       ),
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        Style.h1(''),
-                        Style.h1(widget.coupon.description),
-                        Style.h1(''),
-                      ],
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const SizedBox(width: 70),
-                    const Icon(
-                      Icons.access_time_outlined,
-                      size: 25,
-                      color: Style.lightGray,
-                    ),
-                    const SizedBox(width: 40),
-                    Style.couponDetails('Expires in 2 Months'),
-                    const SizedBox(height: 40),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const SizedBox(width: 70),
-                    const Icon(
-                      Icons.location_on_outlined,
-                      size: 25,
-                      color: Style.lightGray,
-                    ),
-                    const SizedBox(width: 40),
-                    Style.couponDetails('300 ft Away'),
-                    const SizedBox(height: 40),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const SizedBox(width: 70),
-                    const Icon(
-                      Icons.money_outlined,
-                      size: 25,
-                      color: Style.lightGray,
-                    ),
-                    const SizedBox(width: 40),
-                    Style.couponDetails('Min. Purchase of \$5'),
-                    const SizedBox(height: 40),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const SizedBox(width: 70),
-                    const Icon(
-                      Icons.play_arrow,
-                      size: 25,
-                      color: Style.lightGray,
-                    ),
-                    const SizedBox(width: 40),
-                    Style.couponDetails('Not Stackable'),
-                    const SizedBox(height: 40),
-                  ],
-                ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 40),
+                Style.h2(widget.coupon.description),
+                const SizedBox(height: 10),
+                const CouponInfoField(text: 'Expires in 2 months', icon: Icons.access_time_outlined),
+                const CouponInfoField(text: '300 ft. Away', icon: Icons.location_on_outlined),
+                const CouponInfoField(text: 'Min. Purchase of \$5', icon: Icons.monetization_on_outlined),
+                const CouponInfoField(text: 'Not Stackable', icon: CupertinoIcons.square_stack_3d_up_fill),
+                const SizedBox(height: 30),
                 AnimatedContainer(
                   duration: const Duration(seconds: 2),
                   curve: Curves.easeIn,
@@ -179,6 +104,7 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
                     color: Style.darkGray,
                     borderRadius: BorderRadius.circular(10),
                     child: InkWell(
+                      borderRadius: BorderRadius.circular(10),
                       onTap: () {
                         showDialog(
                           context: context,
