@@ -78,9 +78,9 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
                               children: [
                                 Style.couponCode(widget.coupon.couponCode),
                                 Style.couponCodeSub(''),
-                                Style.couponCodeSub('show at checkout'),
+                                Style.couponCodeSub('Click to Save In'),
                                 Style.couponCodeSub(
-                                    'or copy and paste promo code'),
+                                    'My Coupons'),
                               ],
                             ),
                           ),
