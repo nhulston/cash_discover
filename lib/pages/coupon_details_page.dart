@@ -4,7 +4,6 @@ import 'package:cash_discover/models/coupon.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 class CouponDetailsPage extends StatefulWidget {
   const CouponDetailsPage({Key? key, required this.coupon}) : super(key: key);
@@ -90,7 +89,7 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Style.couponCode(widget.coupon.couponCode),
-                                  SizedBox(height: 16),
+                                  const SizedBox(height: 16),
                                   Style.couponCodeSub(
                                       'Click to Save in My Coupons'),
                                   //Style.couponCodeSub('My Coupons'),
@@ -118,60 +117,60 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(width: 70),
-                    Icon(
+                    const SizedBox(width: 70),
+                    const Icon(
                       Icons.access_time_outlined,
                       size: 25,
                       color: Style.lightGray,
                     ),
-                    SizedBox(width: 40),
+                    const SizedBox(width: 40),
                     Style.couponDetails('Expires in 2 Months'),
-                    SizedBox(height: 40),
+                    const SizedBox(height: 40),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(width: 70),
-                    Icon(
+                    const SizedBox(width: 70),
+                    const Icon(
                       Icons.location_on_outlined,
                       size: 25,
                       color: Style.lightGray,
                     ),
-                    SizedBox(width: 40),
+                    const SizedBox(width: 40),
                     Style.couponDetails('300 ft Away'),
-                    SizedBox(height: 40),
+                    const SizedBox(height: 40),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(width: 70),
-                    Icon(
+                    const SizedBox(width: 70),
+                    const Icon(
                       Icons.money_outlined,
                       size: 25,
                       color: Style.lightGray,
                     ),
-                    SizedBox(width: 40),
+                    const SizedBox(width: 40),
                     Style.couponDetails('Min. Purchase of \$5'),
-                    SizedBox(height: 40),
+                    const SizedBox(height: 40),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(width: 70),
-                    Icon(
+                    const SizedBox(width: 70),
+                    const Icon(
                       Icons.play_arrow,
                       size: 25,
                       color: Style.lightGray,
                     ),
-                    SizedBox(width: 40),
+                    const SizedBox(width: 40),
                     Style.couponDetails('Not Stackable'),
-                    SizedBox(height: 40),
+                    const SizedBox(height: 40),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 AnimatedContainer(
                   duration: const Duration(seconds: 2),
                   curve: Curves.easeIn,
@@ -188,33 +187,31 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
                               elevation: 16,
-                              child: Container(
-                                child: ListView(
-                                  shrinkWrap: true,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 20, 10, 20),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          QrImage(
-                                            data: widget.coupon.couponCode,
-                                            version: QrVersions.auto,
-                                            size: 200.0,
-                                            foregroundColor: Style.primary,
-                                          ),
-                                          Style.couponDetails(
-                                              'Present to Merchant'),
-                                        ],
-                                      ),
+                              child: ListView(
+                                shrinkWrap: true,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        10, 20, 10, 20),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        QrImage(
+                                          data: widget.coupon.couponCode,
+                                          version: QrVersions.auto,
+                                          size: 200.0,
+                                          foregroundColor: Style.primary,
+                                        ),
+                                        Style.couponDetails(
+                                            'Present to Merchant'),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             );
                           },
@@ -225,7 +222,7 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.qr_code,
                               size: 120,
                               color: Style.lightGray,

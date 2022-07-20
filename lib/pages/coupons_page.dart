@@ -20,7 +20,6 @@ enum Pages {
 
 class _CouponsPageState extends State<CouponsPage> {
   Pages page = Pages.myCouponsPage;
-  int? currentPage = 0;
   CustomSegmentedController<int> controller = CustomSegmentedController();
 
   @override
@@ -76,7 +75,7 @@ class _CouponsPageState extends State<CouponsPage> {
                     },
                   ),
                 ),
-                CupertinoButton(
+                if (page == Pages.discoverCouponsPage) CupertinoButton(
                     child: const Icon(CupertinoIcons.map_pin_ellipse),
                     onPressed: () {
                       Navigator.of(context).push(
