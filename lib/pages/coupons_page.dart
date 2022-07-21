@@ -6,6 +6,7 @@ import 'package:cash_discover/style/style.dart';
 import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../components/marker_widget.dart';
 
 class CouponsPage extends StatefulWidget {
   const CouponsPage({Key? key}) : super(key: key);
@@ -21,8 +22,9 @@ enum Pages {
 
 class _CouponsPageState extends State<CouponsPage> {
   Pages page = Pages.myCouponsPage;
+  bool allMarkers = true;
   CustomSegmentedController<int> controller = CustomSegmentedController();
-
+  MarkerTypes markCat = MarkerTypes.restaurant;
   static const padding = 20.0;
 
   @override
@@ -79,20 +81,47 @@ class _CouponsPageState extends State<CouponsPage> {
                   ),
                 ),
                 if (page == Pages.discoverCouponsPage)const SizedBox(height: 30),
-                if (page == Pages.discoverCouponsPage) SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: const [
-                      FilterBox(text: 'Food & Drink', icon: Icons.fastfood),
-                      SizedBox(width: padding / 2),
-                      FilterBox(text: 'Things to Do', icon: CupertinoIcons.tickets_fill),
-                      SizedBox(width: padding / 2),
-                      FilterBox(text: 'Coffee', icon: Icons.coffee_rounded),
-                      SizedBox(width: padding / 2),
-                      FilterBox(text: 'Beauty', icon: Icons.spa_rounded),
-                    ],
-                  ),
-                ),
+                if (page == Pages.discoverCouponsPage)
+                      Material(
+                        color: Colors.transparent,
+                        child:
+                        CustomSlidingSegmentedControl<int>(
+                          decoration: BoxDecoration(
+                            color: Style.darkGray,
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          thumbDecoration: BoxDecoration(
+                            color: Style.gray,
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          children: const {
+                            0: Text('All', style: TextStyle(color: Colors.blue),),
+                            1: Icon(Icons.restaurant),
+                            2: Icon(CupertinoIcons.tickets_fill),
+                            3: Icon(Icons.shopping_bag_rounded),
+                            4: Icon(Icons.coffee_rounded),
+                            5: Icon(Icons.bakery_dining_rounded),
+                            },
+                          onValueChanged: (value) {
+                            setState(() {
+                              allMarkers = false;
+                              if (value == 0){
+                                allMarkers = true;
+                              } else if (value == 1) {
+                                markCat = MarkerTypes.restaurant;
+                              } else if (value == 2) {
+                                markCat = MarkerTypes.activity;
+                              } else if (value == 3) {
+                                markCat = MarkerTypes.clothes;
+                              } else if (value == 4) {
+                                markCat = MarkerTypes.coffee;
+                              } else if (value == 5) {
+                                markCat = MarkerTypes.bakery;
+                              }
+                            });
+                          },
+                        ),
+                    ),
                 if (page == Pages.discoverCouponsPage) const SizedBox(height: 30),
                 if (page == Pages.discoverCouponsPage) GestureDetector(
                   behavior: HitTestBehavior.translucent,
@@ -117,8 +146,10 @@ class _CouponsPageState extends State<CouponsPage> {
                 ),
                 SizedBox(height: page == Pages.discoverCouponsPage ? 15 : 30),
                 CouponGrid(
-                  page: page,
-                  setToDiscover: () {
+                    page: page,
+                    markerSelected: markCat,
+                    allMarkers: allMarkers,
+                    setToDiscover: () {
                     setState(() {
                       page = Pages.discoverCouponsPage;
                       controller.value = 1;
