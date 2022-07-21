@@ -47,7 +47,7 @@ class Coupon {
 
   static Future<void> getData() async {
     // Get docs from collection reference
-    if (myCoupons.isEmpty) {
+    if (coupons.isEmpty) {
       QuerySnapshot querySnapshot = await couponDB.get();
 
       final allData = querySnapshot.docs;
@@ -64,7 +64,8 @@ class Coupon {
 
         Coupon newCoupon = Coupon(couponCompany, couponCategory, couponDiscount, couponDate, couponImg, couponColor!, couponMarker!, i); // second to last is placeholder
         coupons.add(newCoupon);
-      }}
+      }
+    }
   }
 
   static List<int> months = [];
