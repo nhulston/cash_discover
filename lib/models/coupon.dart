@@ -66,8 +66,8 @@ class Coupon {
 
         Coupon newCoupon = Coupon(couponCompany, couponCategory, couponDiscount, couponDate, couponImg, couponColor!, couponMarker!, i); // second to last is placeholder
         coupons.add(newCoupon);
+      }
       dbMadeCall = 1;}
-    }
   }
 
   static List<int> months = [];
