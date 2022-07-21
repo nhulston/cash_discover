@@ -27,8 +27,32 @@ class _CouponsPageState extends State<CouponsPage> {
   MarkerTypes markCat = MarkerTypes.restaurant;
   static const padding = 20.0;
 
+  int selected = 0;
+
   @override
   Widget build(BuildContext context) {
+    filterCallback(value) {
+      return () {
+        setState(() {
+          selected = value;
+          allMarkers = false;
+          if (value == 0){
+            allMarkers = true;
+          } else if (value == 1) {
+            markCat = MarkerTypes.restaurant;
+          } else if (value == 2) {
+            markCat = MarkerTypes.activity;
+          } else if (value == 3) {
+            markCat = MarkerTypes.clothes;
+          } else if (value == 4) {
+            markCat = MarkerTypes.coffee;
+          } else if (value == 5) {
+            markCat = MarkerTypes.bakery;
+          }
+        });
+      };
+    }
+
     return CupertinoPageScaffold(
       child: SafeArea(
         bottom: false,
@@ -80,48 +104,25 @@ class _CouponsPageState extends State<CouponsPage> {
                     },
                   ),
                 ),
-                if (page == Pages.discoverCouponsPage)const SizedBox(height: 30),
-                if (page == Pages.discoverCouponsPage)
-                      Material(
-                        color: Colors.transparent,
-                        child:
-                        CustomSlidingSegmentedControl<int>(
-                          decoration: BoxDecoration(
-                            color: Style.darkGray,
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          thumbDecoration: BoxDecoration(
-                            color: Style.gray,
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          children: const {
-                            0: Text('All', style: TextStyle(color: Colors.blue),),
-                            1: Icon(Icons.restaurant),
-                            2: Icon(CupertinoIcons.tickets_fill),
-                            3: Icon(Icons.shopping_bag_rounded),
-                            4: Icon(Icons.coffee_rounded),
-                            5: Icon(Icons.bakery_dining_rounded),
-                            },
-                          onValueChanged: (value) {
-                            setState(() {
-                              allMarkers = false;
-                              if (value == 0){
-                                allMarkers = true;
-                              } else if (value == 1) {
-                                markCat = MarkerTypes.restaurant;
-                              } else if (value == 2) {
-                                markCat = MarkerTypes.activity;
-                              } else if (value == 3) {
-                                markCat = MarkerTypes.clothes;
-                              } else if (value == 4) {
-                                markCat = MarkerTypes.coffee;
-                              } else if (value == 5) {
-                                markCat = MarkerTypes.bakery;
-                              }
-                            });
-                          },
-                        ),
-                    ),
+                if (page == Pages.discoverCouponsPage) const SizedBox(height: 30),
+                if (page == Pages.discoverCouponsPage) SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      FilterBox(text: 'All', icon: CupertinoIcons.list_bullet, index: 0, selectedIndex: selected, callback: filterCallback(0)),
+                      const SizedBox(width: padding / 2),
+                      FilterBox(text: 'Food & Drink', icon: Icons.restaurant, index: 1, selectedIndex: selected, callback: filterCallback(1)),
+                      const SizedBox(width: padding / 2),
+                      FilterBox(text: 'Things to Do', icon: CupertinoIcons.tickets_fill, index: 2, selectedIndex: selected, callback: filterCallback(2)),
+                      const SizedBox(width: padding / 2),
+                      FilterBox(text: 'Shopping', icon: Icons.shopping_bag_rounded, index: 3, selectedIndex: selected, callback: filterCallback(3)),
+                      const SizedBox(width: padding / 2),
+                      FilterBox(text: 'Coffee', icon: Icons.coffee_rounded, index: 4, selectedIndex: selected, callback: filterCallback(4)),
+                      const SizedBox(width: padding / 2),
+                      FilterBox(text: 'Bakeries', icon: Icons.bakery_dining_rounded, index: 5, selectedIndex: selected, callback: filterCallback(5)),
+                    ],
+                  ),
+                ),
                 if (page == Pages.discoverCouponsPage) const SizedBox(height: 30),
                 if (page == Pages.discoverCouponsPage) GestureDetector(
                   behavior: HitTestBehavior.translucent,
