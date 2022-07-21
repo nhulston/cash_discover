@@ -40,8 +40,6 @@ class Coupon {
 
   static CollectionReference couponDB = FirebaseFirestore.instance.collection('coupons');
 
-  static int dbMadeCall = 0;
-
   static Map<int, Color> colorDic = {0: Colors.blueAccent, 1: Colors.purpleAccent, 2: Colors.green, 3: Colors.redAccent};
 
   static Map<String, MarkerTypes> markerDic = {'restaurant': MarkerTypes.restaurant, 'activity': MarkerTypes.activity, 'clothes': MarkerTypes.clothes,
@@ -49,7 +47,7 @@ class Coupon {
 
   static Future<void> getData() async {
     // Get docs from collection reference
-    if (dbMadeCall == 0) {
+    if (myCoupons.isEmpty) {
       QuerySnapshot querySnapshot = await couponDB.get();
 
       final allData = querySnapshot.docs;
@@ -66,8 +64,7 @@ class Coupon {
 
         Coupon newCoupon = Coupon(couponCompany, couponCategory, couponDiscount, couponDate, couponImg, couponColor!, couponMarker!, i); // second to last is placeholder
         coupons.add(newCoupon);
-      }
-      dbMadeCall = 1;}
+      }}
   }
 
   static List<int> months = [];
