@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'components/marker_widget.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async{
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Coupon.init();
+    MarkerWidget.init();
     return const CupertinoApp(
       localizationsDelegates: [
         DefaultMaterialLocalizations.delegate,

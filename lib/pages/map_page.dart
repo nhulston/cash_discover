@@ -27,7 +27,6 @@ class _MapPageState extends State<MapPage> {
   void initState() {
     super.initState();
     setCustomMarker();
-    MarkerWidget.init();
   }
 
   @override

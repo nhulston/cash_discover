@@ -111,7 +111,7 @@ class _CouponsPageState extends State<CouponsPage> {
                     children: [
                       FilterBox(text: 'All', icon: CupertinoIcons.list_bullet, index: 0, selectedIndex: selected, callback: filterCallback(0)),
                       const SizedBox(width: padding / 2),
-                      FilterBox(text: 'Food & Drink', icon: Icons.restaurant, index: 1, selectedIndex: selected, callback: filterCallback(1)),
+                      FilterBox(text: 'Restaurants', icon: Icons.restaurant, index: 1, selectedIndex: selected, callback: filterCallback(1)),
                       const SizedBox(width: padding / 2),
                       FilterBox(text: 'Things to Do', icon: CupertinoIcons.tickets_fill, index: 2, selectedIndex: selected, callback: filterCallback(2)),
                       const SizedBox(width: padding / 2),

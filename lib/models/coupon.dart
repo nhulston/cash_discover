@@ -46,6 +46,8 @@ class Coupon {
   'coffee': MarkerTypes.coffee, 'bakery': MarkerTypes.bakery};
 
   static Future<void> getData() async {
+    if (coupons.isNotEmpty) return;
+
     // Get docs from collection reference
     QuerySnapshot querySnapshot = await couponDB.get();
 
