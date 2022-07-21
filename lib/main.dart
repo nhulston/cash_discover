@@ -1,3 +1,4 @@
+import 'package:cash_discover/models/coupon.dart';
 import 'package:flutter/material.dart';
 import 'package:cash_discover/components/navigation_icon.dart';
 import 'package:cash_discover/style/style.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Coupon.init();
     return const CupertinoApp(
       localizationsDelegates: [
         DefaultMaterialLocalizations.delegate,

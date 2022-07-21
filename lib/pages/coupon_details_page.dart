@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cash_discover/components/coupon_info_field.dart';
 import 'package:cash_discover/pages/coupons_page.dart';
 import 'package:cash_discover/style/style.dart';
@@ -100,8 +98,8 @@ class _CouponDetailsPageState extends State<CouponDetailsPage> with SingleTicker
               Column(
                 children: [
                   const SizedBox(height: 10),
-                  CouponInfoField(text: 'Expires in ${1 + Random().nextInt(9)} months', icon: Icons.access_time_outlined),
-                  CouponInfoField(text: '${(1 + Random().nextInt(9)) * 100} ft. Away', icon: Icons.location_on_outlined),
+                  CouponInfoField(text: 'Expires in ${Coupon.months[widget.coupon.id]} months', icon: Icons.access_time_outlined),
+                  CouponInfoField(text: '${Coupon.distances[widget.coupon.id]} ft. Away', icon: Icons.location_on_outlined),
                   const CouponInfoField(text: 'Min. Purchase of \$5', icon: Icons.monetization_on_outlined),
                   const CouponInfoField(text: 'Not Stackable', icon: CupertinoIcons.square_stack_3d_up_fill),
                   const SizedBox(height: 30),

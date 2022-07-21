@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,7 @@ class Coupon {
   String image;
   Color bgColor;
   MarkerTypes marker;
+  int id;
 
   Coupon(
     this.merchantName,
@@ -20,6 +23,7 @@ class Coupon {
     this.image,
     this.bgColor,
     this.marker,
+    this.id,
   );
 
   bool isOwned() {
@@ -57,8 +61,18 @@ class Coupon {
       var couponColor = colorDic[i % 4];
       var couponMarker = markerDic[snapshot.get('marker')];
 
-      Coupon newCoupon = Coupon(couponCompany, couponCategory, couponDiscount, couponDate, couponImg, couponColor!, couponMarker!); //last is placeholer
+      Coupon newCoupon = Coupon(couponCompany, couponCategory, couponDiscount, couponDate, couponImg, couponColor!, couponMarker!, i); // second to last is placeholder
       coupons.add(newCoupon);
+    }
+  }
+
+  static List<int> months = [];
+  static List<int> distances = [];
+  static void init() {
+    var r = Random();
+    for (int i = 0; i < 15; i++) {
+      months.add(1 + r.nextInt(9));
+      distances.add((1 + Random().nextInt(9)) * 100);
     }
   }
 
