@@ -23,7 +23,7 @@ class _FilterBoxState extends State<FilterBox> {
       child: Container(
         width: 130,
         decoration: BoxDecoration(
-          color: widget.index == widget.selectedIndex ? Style.gray : Style.darkGray,
+          color: widget.index == widget.selectedIndex ? Colors.white12 : Style.darkGray,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Padding(
@@ -31,12 +31,7 @@ class _FilterBoxState extends State<FilterBox> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(
-                widget.icon,
-                color: widget.index == widget.selectedIndex
-                  ? const Color.fromRGBO(63, 106, 255, 1.0)
-                  : CupertinoColors.activeBlue,
-              ),
+              Icon(widget.icon),
               const SizedBox(height: 10),
               Text(
                 widget.text,
