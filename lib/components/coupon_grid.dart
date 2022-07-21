@@ -17,9 +17,9 @@ class CouponGrid extends StatefulWidget {
 
 class CouponGridState extends State<CouponGrid> {
 
-  // CouponGridState() {
-  //   Coupon.getData(); this should be called once we add the final field in firebase
-  // }
+  CouponGridState() {
+    Coupon.getData(); //this should be called once we add the final field in firebase
+  }
 
   static Set<Coupon> myCoupons = {};
   static Set<Coupon> discoverCoupons = Coupon.coupons.toSet();
