@@ -2,13 +2,15 @@ import 'package:cash_discover/components/coupon_widget.dart';
 import 'package:cash_discover/components/custom_button.dart';
 import 'package:cash_discover/pages/coupons_page.dart';
 import 'package:flutter/cupertino.dart';
-
 import '../models/coupon.dart';
 import '../style/style.dart';
+import '../components/marker_widget.dart';
 
 class CouponGrid extends StatefulWidget {
-  const CouponGrid({Key? key, required this.page, required this.setToDiscover}) : super(key: key);
+  const CouponGrid({Key? key, required this.page, required this.markerSelected, required this.allMarkers, required this.setToDiscover}) : super(key: key);
   final Pages page;
+  final MarkerTypes markerSelected;
+  final bool allMarkers;
   final VoidCallback setToDiscover;
 
   @override
@@ -41,8 +43,8 @@ class CouponGridState extends State<CouponGrid> {
           Style.p('Your coupon list is empty.\nAdd some from the discover page!'),
           const SizedBox(height: 90),
           CustomButton(
-            text: 'Discover',
-            callback: widget.setToDiscover
+              text: 'Discover',
+              callback: widget.setToDiscover
           ),
         ],
       );
@@ -63,15 +65,16 @@ class CouponGridState extends State<CouponGrid> {
     } else {
       visibleCoupons = [];
       for (Coupon c in Coupon.coupons) {
-        if (!c.isOwned()) {
+        if (!c.isOwned() &&
+            ((c.marker == widget.markerSelected) || widget.allMarkers)) {
           visibleCoupons.add(
-            CouponWidget(
-              coupon: c,
-              updateParentCallback: () {
-                setState(() {});
-              },
-              page: widget.page,
-            )
+              CouponWidget(
+                coupon: c,
+                updateParentCallback: () {
+                  setState(() {});
+                },
+                page: widget.page,
+              )
           );
         }
       }
