@@ -40,6 +40,8 @@ class Coupon {
 
   static CollectionReference couponDB = FirebaseFirestore.instance.collection('coupons');
 
+  static int dbMadeCall = 0;
+
   static Map<int, Color> colorDic = {0: Colors.blueAccent, 1: Colors.purpleAccent, 2: Colors.green, 3: Colors.redAccent};
 
   static Map<String, MarkerTypes> markerDic = {'restaurant': MarkerTypes.restaurant, 'activity': MarkerTypes.activity, 'clothes': MarkerTypes.clothes,
@@ -49,22 +51,24 @@ class Coupon {
     if (coupons.isNotEmpty) return;
 
     // Get docs from collection reference
-    QuerySnapshot querySnapshot = await couponDB.get();
+    if (dbMadeCall == 0) {
+      QuerySnapshot querySnapshot = await couponDB.get();
 
-    final allData = querySnapshot.docs;
-    for (var i = 0; i < allData.length; i++){
-      var snapshot = allData[i];
+      final allData = querySnapshot.docs;
+      for (var i = 0; i < allData.length; i++){
+        var snapshot = allData[i];
 
-      var couponCompany = snapshot.get('company');
-      var couponCategory = snapshot.get('category');
-      var couponDiscount = snapshot.get('discount');
-      var couponDate = snapshot.get('date').toDate();
-      var couponImg = snapshot.get('img');
-      var couponColor = colorDic[i % 4];
-      var couponMarker = markerDic[snapshot.get('marker')];
+        var couponCompany = snapshot.get('company');
+        var couponCategory = snapshot.get('category');
+        var couponDiscount = snapshot.get('discount');
+        var couponDate = snapshot.get('date').toDate();
+        var couponImg = snapshot.get('img');
+        var couponColor = colorDic[i % 4];
+        var couponMarker = markerDic[snapshot.get('marker')];
 
-      Coupon newCoupon = Coupon(couponCompany, couponCategory, couponDiscount, couponDate, couponImg, couponColor!, couponMarker!, i); // second to last is placeholder
-      coupons.add(newCoupon);
+        Coupon newCoupon = Coupon(couponCompany, couponCategory, couponDiscount, couponDate, couponImg, couponColor!, couponMarker!, i); // second to last is placeholder
+        coupons.add(newCoupon);
+      dbMadeCall = 1;}
     }
   }
 
